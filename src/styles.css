@@ -49,137 +49,137 @@ html, body {
   outline: none;
 }
 
-/* Custom Marker Pinning & Appearance */
+/* ============================================
+   CUSTOM MAP MARKERS — SVG + foreignObject
+   Elongated teardrop SVG pin.
+   Icon lives inside via <foreignObject> —
+   no z-index / stacking context issues.
+   --mc = layer color, set inline in TS.
+   ============================================ */
+
 .custom-map-marker {
-  background: transparent;
-  border: none;
+  background: transparent !important;
+  border: none !important;
+  overflow: visible !important;
 }
 
-.marker-container {
+.leaflet-marker-icon.custom-map-marker {
+  overflow: visible !important;
+}
+
+/* Parent div: NO filter here — keeping it stacking-context-free
+   lets .marker-pulse-ring (sibling of svg) render normally. */
+.marker-root {
   position: relative;
-  width: 26px;
-  height: 42px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.6));
-  transition: transform 0.15s ease-out;
+  width: 32px;
+  height: 50px;
+  cursor: pointer;
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.custom-map-marker:hover .marker-container {
-  transform: scale(1.15) translateY(-3px);
-  z-index: 999;
+.custom-map-marker:hover .marker-root {
+  transform: scale(1.2) translateY(-4px);
 }
 
-.map-marker-background {
-  width: 26px;
-  height: 42px;
+/* SVG pin — drop-shadow lives HERE (on the SVG), not on the parent.
+   The SVG's filter creates a stacking context within SVG itself,
+   but since the icon is inside via foreignObject it renders fine. */
+.marker-pin-svg {
+  width: 32px;
+  height: 50px;
   display: block;
+  overflow: visible;
+  transition: filter 0.18s ease;
 }
 
-.map-marker-foreground-wrapper {
-  position: absolute;
-  top: 5px;
-  left: 3px;
-  width: 20px;
-  height: 20px;
+.custom-map-marker:hover .marker-pin-svg {
+  filter: drop-shadow(0 6px 16px color-mix(in srgb, var(--mc) 80%, #000))
+          drop-shadow(0 0 10px color-mix(in srgb, var(--mc) 50%, transparent)) !important;
+}
+
+/* SVG elements */
+.marker-pin-body {
+  fill: var(--mc);
+  stroke: color-mix(in srgb, var(--mc) 55%, white);
+  stroke-width: 1.2px;
+}
+
+.marker-pin-inner {
+  fill: rgba(0, 0, 0, 0.3);
+  stroke: rgba(255, 255, 255, 0.6);
+  stroke-width: 1px;
+}
+
+.marker-pin-shine {
+  fill: rgba(255, 255, 255, 0.35);
+}
+
+/* foreignObject wrapper — fills the fo area, centers the icon */
+.mfo-wrap {
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: none;
+  overflow: hidden;
 }
 
-.map-marker-foreground {
+/* Icon variants inside foreignObject */
+.mfo-icon-fa {
   font-size: 11px;
-  color: #ffffff;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.8));
-  max-width: 16px;
-  max-height: 16px;
-  object-fit: contain;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+  line-height: 1;
 }
 
-.map-marker-emoji {
+.mfo-icon-emoji {
   font-size: 12px;
   line-height: 1;
 }
 
-.map-marker-text {
-  font-size: 10px;
-  font-weight: 800;
-  color: #ffffff;
+.mfo-icon-text {
+  font-size: 9px;
+  font-weight: 900;
+  color: #fff;
   font-family: var(--font-gta);
+  letter-spacing: -0.03em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
 }
 
-/* Ping Ripple Animation on Active / Hover Marker */
-.map-marker-ping {
+.mfo-icon-img {
+  width: 13px;
+  height: 13px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+/* Pulse ring — sibling of the SVG.
+   Parent has no filter → no stacking context → ring renders freely. */
+.marker-pulse-ring {
   position: absolute;
-  top: 50%;
+  bottom: 1px;
   left: 50%;
-  width: 12px;
-  height: 12px;
-  margin-left: -6px;
-  margin-top: 10px;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: #ff0033;
-  z-index: -1;
+  background: var(--mc);
+  opacity: 0;
   pointer-events: none;
-  animation: marker-pulse-inner 1.6s infinite ease-out;
+  transition: opacity 0.2s;
 }
 
-.map-marker-ping::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 44px;
-  height: 44px;
-  margin-left: -22px;
-  margin-top: -22px;
-  border-radius: 50%;
-  border: 2px solid #ffffff;
-  animation: marker-pulse-outer 1.6s infinite ease-out;
-  opacity: 0;
+.custom-map-marker:hover .marker-pulse-ring {
+  opacity: 1;
+  animation: marker-pulse-out 1.4s ease-out infinite;
 }
 
-.map-marker-ping::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 44px;
-  height: 44px;
-  margin-left: -22px;
-  margin-top: -22px;
-  border-radius: 50%;
-  border: 2px solid #f59e0b;
-  animation: marker-pulse-outer 1.6s infinite ease-out;
-  animation-delay: 0.3s;
-  opacity: 0;
+@keyframes marker-pulse-out {
+  0%   { transform: translateX(-50%) scale(0.5); opacity: 0.85; }
+  80%  { transform: translateX(-50%) scale(3.5); opacity: 0; }
+  100% { transform: translateX(-50%) scale(3.5); opacity: 0; }
 }
 
-@keyframes marker-pulse-outer {
-  0% {
-    transform: scale(0.1);
-    opacity: 0.9;
-  }
-  70% {
-    transform: scale(1.2);
-    opacity: 0.1;
-  }
-  100% {
-    transform: scale(1.4);
-    opacity: 0;
-  }
-}
-
-@keyframes marker-pulse-inner {
-  0%, 100% {
-    background-color: #f59e0b;
-  }
-  50% {
-    background-color: #ffffff;
-  }
-}
 
 /* Cluster Marker Styling */
 .custom-cluster-icon {

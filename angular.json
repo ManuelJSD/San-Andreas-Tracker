@@ -22,23 +22,13 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              },
-              {
-                "glob": "**/*",
-                "input": "GTA-SA-MapInteractivo/map_tiles",
-                "output": "map_tiles"
-              },
-              {
-                "glob": "**/*",
-                "input": "GTA-SA-MapInteractivo/satellite_tiles",
-                "output": "satellite_tiles"
               }
             ],
             "styles": [
               "node_modules/leaflet/dist/leaflet.css",
               "node_modules/leaflet.markercluster/dist/MarkerCluster.css",
               "node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css",
-              "node_modules/@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css",
+
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/styles.css"
             ],
@@ -46,7 +36,7 @@
               "leaflet",
               "leaflet.markercluster",
               "leaflet.featuregroup.subgroup",
-              "@geoman-io/leaflet-geoman-free"
+
             ]
           },
           "configurations": {

@@ -2,7 +2,6 @@ import { Injectable, signal, inject } from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
 import 'leaflet.featuregroup.subgroup';
-import '@geoman-io/leaflet-geoman-free';
 import { StorageService } from './storage.service';
 import { getCustomIcon } from '../utils/custom-icons';
 import { leafletToGtaCoordinates } from '../utils/coordinates';
@@ -130,14 +129,6 @@ export class MapService {
       }
     });
 
-    // Initialize Geoman options - use L.PM.setOptIn for global opt-in
-    try {
-      if ((L as any).PM && typeof (L as any).PM.setOptIn === 'function') {
-        (L as any).PM.setOptIn(true);
-      }
-    } catch (e) {
-      console.warn('Geoman PM not available:', e);
-    }
 
     this.isMapReady.set(true);
     this.checkUrlParams();
@@ -286,7 +277,7 @@ export class MapService {
 
     if (this.shareMarker) {
       this.shareMarker.bindPopup(`
-        <div class="p-3 bg-neutral-900 text-white rounded-lg min-w-[200px] border border-amber-500/40">
+        <div class="p-3 bg-neutral-900 text-white rounded-lg min-w-50 border border-amber-500/40">
           <h4 class="font-bold text-amber-400 text-sm mb-1 flex items-center gap-1.5">
             <i class="fas fa-location-dot"></i> Shared Location
           </h4>

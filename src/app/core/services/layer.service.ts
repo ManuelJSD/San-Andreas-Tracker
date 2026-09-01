@@ -1,4 +1,4 @@
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, inject, signal, computed } from '@angular/core';
 import * as L from 'leaflet';
 import { LayerMetadata } from '../models/layer.model';
 import { CollectibleFeature, CollectibleItem, LayerId } from '../models/collectible.model';
@@ -6,6 +6,7 @@ import { CustomLayerData } from '../models/custom-layer.model';
 import { MapService } from './map.service';
 import { ProgressService } from './progress.service';
 import { StorageService } from './storage.service';
+import { I18nService } from './i18n.service';
 import { gtaCoordinatesToLeaflet } from '../utils/coordinates';
 import { getCustomIcon } from '../utils/custom-icons';
 
@@ -27,6 +28,7 @@ export class LayerService {
   private mapService = inject(MapService);
   private progressService = inject(ProgressService);
   private storage = inject(StorageService);
+  public i18n = inject(I18nService);
 
   // Layer metadata definitions
   public readonly layerMetadata: LayerMetadata[] = [
@@ -169,6 +171,17 @@ export class LayerService {
 
   // Active layers set
   public activeLayerIds = signal<Set<string>>(new Set());
+
+  // Localized Layer Metadata (reactive to current language)
+  public readonly localizedLayerMetadata = computed(() => {
+    this.i18n.currentLang();
+    return this.layerMetadata.map(meta => ({
+      ...meta,
+      name: this.i18n.t(`layer.${meta.id}.name`),
+      description: this.i18n.t(`layer.${meta.id}.desc`),
+      rewardText: meta.rewardText ? this.i18n.t(`layer.${meta.id}.reward`) : undefined
+    }));
+  });
 
   // Custom user created layers
   public customLayers = signal<CustomLayerData[]>([]);
@@ -350,7 +363,7 @@ export class LayerService {
 
       const labelText = document.createElement('span');
       labelText.className = 'btn-label-text';
-      labelText.textContent = isChecked ? 'Marked as Completed' : 'Mark as Collected';
+      labelText.textContent = isChecked ? this.i18n.t('popup.completed') : this.i18n.t('popup.markAsCollected');
 
       checkbox.addEventListener('change', () => {
         const next = this.progressService.toggleChecked(layerId, feature.properties.id, checkbox.checked);
@@ -358,11 +371,11 @@ export class LayerService {
         if (next) {
           checkboxContainer.classList.add('completed');
           iconSpan.innerHTML = '<i class="fas fa-check-circle text-emerald-400"></i>';
-          labelText.textContent = 'Marked as Completed';
+          labelText.textContent = this.i18n.t('popup.completed');
         } else {
           checkboxContainer.classList.remove('completed');
           iconSpan.innerHTML = '<i class="far fa-circle text-neutral-400"></i>';
-          labelText.textContent = 'Mark as Collected';
+          labelText.textContent = this.i18n.t('popup.markAsCollected');
         }
       });
 
@@ -378,12 +391,12 @@ export class LayerService {
 
     const shareBtn = document.createElement('button');
     shareBtn.className = 'gta-popup-share-btn';
-    shareBtn.innerHTML = '<i class="fas fa-share-nodes"></i> Share URL';
+    shareBtn.innerHTML = `<i class="fas fa-share-nodes"></i> ${this.i18n.t('popup.shareUrl')}`;
     shareBtn.addEventListener('click', () => {
       const shareUrl = `${window.location.origin}${window.location.pathname}?list=${layerId}&id=${feature.properties.id}`;
       navigator.clipboard.writeText(shareUrl);
       this.mapService.setFeatureHistory(layerId, feature.properties.id);
-      alert('Link to this location copied to clipboard!');
+      alert(this.i18n.t('popup.linkCopied'));
     });
     footer.appendChild(shareBtn);
 
@@ -867,7 +880,10 @@ export class LayerService {
     this.storage.setItem('custom_layers', layers);
   }
 
-  private getLayerName(layerId: string): string {
+  public getLayerName(layerId: string): string {
+    const key = `layer.${layerId}.name`;
+    const val = this.i18n.t(key);
+    if (val && val !== key) return val;
     const found = this.layerMetadata.find(l => l.id === layerId);
     return found ? found.name : layerId;
   }
