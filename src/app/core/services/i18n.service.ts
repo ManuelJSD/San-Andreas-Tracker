@@ -148,6 +148,7 @@ const ES_TRANSLATIONS: Translations = {
   'attributions.sourceWikiGta': 'Imágenes de Herraduras y Ostras de',
   'attributions.sourceIcons': 'Iconos de radar remasterizados por',
   'attributions.sourceMap': 'Mapa satelital de alta resolución por',
+  'attributions.sourceGithub': 'Código fuente disponible en GitHub',
   'attributions.close': 'Entendido'
 };
 
@@ -292,6 +293,7 @@ const EN_TRANSLATIONS: Translations = {
   'attributions.sourceWikiGta': 'Horseshoe and Oyster photos from',
   'attributions.sourceIcons': 'Remastered radar icons by',
   'attributions.sourceMap': 'High-resolution satellite map by',
+  'attributions.sourceGithub': 'Source code available on GitHub',
   'attributions.close': 'Got it'
 };
 
