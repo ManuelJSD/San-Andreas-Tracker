@@ -1,0 +1,135 @@
+<div class="relative w-full h-full overflow-hidden">
+  <!-- Map Div Container -->
+  <div id="gta-map-container" class="w-full h-full z-0"></div>
+
+  <!-- Floating Map Controls (Right Side) -->
+  <div class="absolute top-4 right-4 z-20 flex flex-col gap-2 pointer-events-auto">
+    <!-- Tile Switcher Button -->
+    <button 
+      (click)="toggleTile()" 
+      title="Cambiar Vista de Mapa (Satélite / Ingame)"
+      class="group relative flex items-center justify-center w-11 h-11 rounded-xl bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-700/60 hover:border-amber-500/60 text-neutral-200 hover:text-amber-400 shadow-xl backdrop-blur-md transition-all duration-200">
+      @if (mapService.activeTileLayer() === 'ingame') {
+        <i class="fas fa-satellite text-lg group-hover:scale-110 transition-transform"></i>
+      } @else {
+        <i class="fas fa-map text-lg group-hover:scale-110 transition-transform text-amber-400"></i>
+      }
+      <span class="absolute right-13 px-2 py-1 bg-neutral-900/95 border border-neutral-700 text-xs rounded shadow-lg text-white font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+        {{ mapService.activeTileLayer() === 'ingame' ? 'Vista Satelital' : 'Vista Mapa Clásico' }}
+      </span>
+    </button>
+
+    <!-- Zoom In -->
+    <button 
+      (click)="zoomIn()" 
+      title="Acercar (+)"
+      class="flex items-center justify-center w-11 h-11 rounded-xl bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-700/60 hover:border-amber-500/60 text-neutral-200 hover:text-amber-400 shadow-xl backdrop-blur-md transition-all duration-200">
+      <i class="fas fa-plus text-base"></i>
+    </button>
+
+    <!-- Zoom Out -->
+    <button 
+      (click)="zoomOut()" 
+      title="Alejar (-)"
+      class="flex items-center justify-center w-11 h-11 rounded-xl bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-700/60 hover:border-amber-500/60 text-neutral-200 hover:text-amber-400 shadow-xl backdrop-blur-md transition-all duration-200">
+      <i class="fas fa-minus text-base"></i>
+    </button>
+
+    <!-- Reset Full View -->
+    <button 
+      (click)="resetView()" 
+      title="Centrar Todo el Estado de San Andreas"
+      class="flex items-center justify-center w-11 h-11 rounded-xl bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-700/60 hover:border-amber-500/60 text-neutral-200 hover:text-amber-400 shadow-xl backdrop-blur-md transition-all duration-200">
+      <i class="fas fa-crosshairs text-base"></i>
+    </button>
+
+    <!-- Share Pin Dropper Toggle -->
+    <button 
+      (click)="toggleShareMarker()" 
+      [class.bg-cyan-500]="mapService.isShareMarkerActive()"
+      [class.text-neutral-950]="mapService.isShareMarkerActive()"
+      [class.border-cyan-400]="mapService.isShareMarkerActive()"
+      title="Modo Compartir Ubicación (Haz clic en cualquier punto del mapa)"
+      class="group relative flex items-center justify-center w-11 h-11 rounded-xl bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-700/60 hover:border-cyan-500/60 text-neutral-200 hover:text-cyan-400 shadow-xl backdrop-blur-md transition-all duration-200">
+      <i class="fas fa-location-dot text-base"></i>
+      <span class="absolute right-13 px-2 py-1 bg-neutral-900/95 border border-neutral-700 text-xs rounded shadow-lg text-white font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+        {{ mapService.isShareMarkerActive() ? 'Cancelar Marcador' : 'Colocar Pin Compartible' }}
+      </span>
+    </button>
+
+    <!-- Attributions Button -->
+    <button 
+      (click)="showAttributions.set(!showAttributions())" 
+      title="Créditos y Fuentes"
+      class="flex items-center justify-center w-11 h-11 rounded-xl bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-700/60 hover:border-amber-500/60 text-neutral-400 hover:text-amber-400 shadow-xl backdrop-blur-md transition-all duration-200">
+      <i class="fas fa-circle-info text-sm"></i>
+    </button>
+  </div>
+
+  <!-- Share Marker Active Status Banner -->
+  @if (mapService.isShareMarkerActive()) {
+    <div class="absolute top-4 left-1/2 -translate-x-1/2 z-20 bg-neutral-900/95 border border-cyan-500/60 rounded-full px-4 py-2 shadow-2xl backdrop-blur-md flex items-center gap-3 animate-bounce">
+      <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+      <span class="text-xs font-semibold text-cyan-200">
+        Haz clic o arrastra en el mapa para fijar tu pin compartido
+      </span>
+      @if (mapService.shareMarkerCoords(); as coords) {
+        <span class="text-[11px] bg-cyan-950/80 text-cyan-300 font-mono px-2 py-0.5 rounded border border-cyan-700/40">
+          GTA: [{{ coords.gtaX }}, {{ coords.gtaY }}]
+        </span>
+      }
+      <button 
+        (click)="removeShareMarker()" 
+        class="text-neutral-400 hover:text-white text-xs px-1.5 py-0.5 rounded hover:bg-neutral-800 transition">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  }
+
+  <!-- Attributions Modal / Overlay -->
+  @if (showAttributions()) {
+    <div class="absolute inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+      <div class="bg-neutral-900 border border-amber-500/40 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
+        <button 
+          (click)="showAttributions.set(false)" 
+          class="absolute top-4 right-4 text-neutral-400 hover:text-amber-400 w-8 h-8 rounded-lg flex items-center justify-center hover:bg-neutral-800 transition">
+          <i class="fas fa-times text-base"></i>
+        </button>
+
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400">
+            <i class="fas fa-map-location-dot text-lg"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-white font-gta tracking-wide">GTA San Andreas Interactive Map</h3>
+            <p class="text-xs text-neutral-400">Versión Angular 22 Modernizada</p>
+          </div>
+        </div>
+
+        <div class="space-y-3 text-xs text-neutral-300 border-t border-neutral-800 pt-4">
+          <p class="leading-relaxed">
+            Este mapa interactivo y rastreador del 100% incluye todas las ubicaciones de coleccionables, saltos y misiones secundarias de Grand Theft Auto: San Andreas.
+          </p>
+          <div class="bg-neutral-950/70 rounded-xl p-3 border border-neutral-800 space-y-2">
+            <h4 class="font-semibold text-amber-400 text-[11px] uppercase tracking-wider">Fuentes & Agradecimientos:</h4>
+            <ul class="space-y-1.5 list-disc list-inside text-neutral-400">
+              <li>Ubicaciones de marcadores de <a href="https://ehgames.com/gta/maplist/" target="_blank" class="text-amber-400 hover:underline">ehgames.com</a></li>
+              <li>Imágenes de Graffitis y Fotos de <a href="https://gta.fandom.com/wiki/" target="_blank" class="text-amber-400 hover:underline">GTA Wiki / Fandom</a></li>
+              <li>Imágenes de Herraduras y Ostras de <a href="http://en.wikigta.org/wiki/Main_Page" target="_blank" class="text-amber-400 hover:underline">WikiGTA</a></li>
+              <li>Iconos de radar remasterizados por <a href="https://gtaforums.com/topic/893039-remastered-radar-icons-sa/" target="_blank" class="text-amber-400 hover:underline">CRRPGMykael (GTAForums)</a></li>
+              <li>Mapa satelital de alta resolución por <a href="https://ian-albert.com/games/grand_theft_auto_san_andreas_maps/" target="_blank" class="text-amber-400 hover:underline">Ian Albert</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-6 flex justify-end">
+          <button 
+            (click)="showAttributions.set(false)" 
+            class="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-neutral-950 font-semibold text-xs rounded-xl shadow-lg transition">
+            Entendido
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>
