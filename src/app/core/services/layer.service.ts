@@ -422,8 +422,8 @@ export class LayerService {
 
   private createPopupMedia(layerId: string, feature: CollectibleFeature): HTMLElement | null {
     if (feature.properties.image_id) {
-      // Changed to use local images format: /images/<layerId>/<id>.webp
-      const imageSrc = `/images/${layerId}/${feature.properties.id}.webp`;
+      // Changed to use local images format: images/<layerId>/<id>.webp
+      const imageSrc = `images/${layerId}/${feature.properties.id}.webp`;
 
       const mediaWrap = document.createElement('div');
       mediaWrap.className = 'gta-popup-media-wrap';
@@ -465,7 +465,7 @@ export class LayerService {
 
       img.onerror = () => {
         img.onerror = null; // Prevent infinite loop if placeholder is also missing
-        img.src = '/images/placeholder.webp';
+        img.src = 'images/placeholder.webp';
       };
 
       mediaWrap.appendChild(img);
@@ -497,7 +497,8 @@ export class LayerService {
     iconColor: string
   ): void {
     const parentCluster = this.mapService.getParentClusterGroup();
-    const subgroup = (L as any).featureGroup.subGroup(parentCluster);
+    const L_ext = (window as any).L || L;
+    const subgroup = L_ext.featureGroup.subGroup(parentCluster);
     const featureMap = new Map<string, L.Layer[]>();
     const bounds = L.latLngBounds([]);
     const collectibleItems: CollectibleItem[] = [];
@@ -576,7 +577,8 @@ export class LayerService {
 
   private buildStuntJumpsLayer(): void {
     const parentCluster = this.mapService.getParentClusterGroup();
-    const subgroup = (L as any).featureGroup.subGroup(parentCluster);
+    const L_ext = (window as any).L || L;
+    const subgroup = L_ext.featureGroup.subGroup(parentCluster);
     const featureMap = new Map<string, L.Layer[]>();
     const bounds = L.latLngBounds([]);
     const collectibleItems: CollectibleItem[] = [];

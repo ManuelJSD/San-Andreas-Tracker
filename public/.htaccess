@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Redireccionar peticiones que no sean archivos o directorios reales a index.html
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Tipos MIME para imágenes de teselas y assets
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType image/png .png
+</IfModule>

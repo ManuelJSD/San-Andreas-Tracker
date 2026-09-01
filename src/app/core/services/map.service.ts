@@ -1,7 +1,5 @@
 import { Injectable, signal, inject } from '@angular/core';
 import * as L from 'leaflet';
-import 'leaflet.markercluster';
-import 'leaflet.featuregroup.subgroup';
 import { StorageService } from './storage.service';
 import { getCustomIcon } from '../utils/custom-icons';
 import { leafletToGtaCoordinates } from '../utils/coordinates';
@@ -67,8 +65,11 @@ export class MapService {
       maxBoundsViscosity: 0.8
     });
 
+    const baseHref = document.querySelector('base')?.getAttribute('href') || './';
+    const basePath = baseHref.endsWith('/') ? baseHref : `${baseHref}/`;
+
     // Setup base tile layers
-    this.tileLayers.ingame = L.tileLayer('map_tiles/{z}/{x}/{y}.png', {
+    this.tileLayers.ingame = L.tileLayer(`${basePath}map_tiles/{z}/{x}/{y}.png`, {
       minNativeZoom: 2,
       maxNativeZoom: 5,
       minZoom: 1,
@@ -78,7 +79,7 @@ export class MapService {
       attribution: 'Map from TheCynicalAutist'
     });
 
-    this.tileLayers.satellite = L.tileLayer('satellite_tiles/{z}/{x}/{y}.png', {
+    this.tileLayers.satellite = L.tileLayer(`${basePath}satellite_tiles/{z}/{x}/{y}.png`, {
       minNativeZoom: 0,
       maxNativeZoom: 5,
       minZoom: 1,
@@ -93,7 +94,8 @@ export class MapService {
     this.tileLayers[savedTile].addTo(this.map);
 
     // Create central parent cluster group
-    this.parentClusterGroup = (L as any).markerClusterGroup({
+    const L_ext = (window as any).L || L;
+    this.parentClusterGroup = L_ext.markerClusterGroup({
       spiderfyOnMaxZoom: true,
       showCoverageOnHover: false,
       zoomToBoundsOnClick: true,

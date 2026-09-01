@@ -9,28 +9,28 @@ import { I18nService } from '../../core/services/i18n.service';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="flex items-center gap-4 px-4 py-2 bg-neutral-900/85 backdrop-blur-md border-b border-neutral-800/60 pointer-events-auto select-none">
+    <div class="flex items-center gap-2 sm:gap-4 px-2 sm:px-4 py-2 bg-neutral-900/85 backdrop-blur-md border-b border-neutral-800/60 pointer-events-auto select-none overflow-hidden w-full">
       <!-- GTA Logo / Brand -->
-      <div class="flex items-center gap-2 shrink-0">
-        <div class="w-7 h-7 rounded-lg bg-linear-to-br from-amber-500 to-amber-700 flex items-center justify-center">
-          <i class="fas fa-star text-neutral-950 text-xs"></i>
+      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-linear-to-br from-amber-500 to-amber-700 flex items-center justify-center">
+          <i class="fas fa-star text-neutral-950 text-[10px] sm:text-xs"></i>
         </div>
-        <span class="font-gta text-amber-400 text-sm tracking-wider hidden sm:block">{{ i18n.t('app.title') }}</span>
+        <span class="font-gta text-amber-400 text-xs sm:text-sm tracking-wider hidden sm:block">{{ i18n.t('app.title') }}</span>
       </div>
 
       <!-- Separator -->
       <div class="w-px h-5 bg-neutral-700 shrink-0 hidden sm:block"></div>
 
       <!-- Core Collectibles Progress Bar -->
-      <div class="flex-1 flex items-center gap-3 min-w-0">
-        <span class="text-[11px] font-semibold text-neutral-400 shrink-0">{{ i18n.t('app.hudCore') }}</span>
-        <div class="flex-1 h-2 bg-neutral-800 rounded-full overflow-hidden min-w-20">
+      <div class="flex-1 flex items-center gap-2 sm:gap-3 min-w-0">
+        <span class="hidden sm:block text-[11px] font-semibold text-neutral-400 shrink-0">{{ i18n.t('app.hudCore') }}</span>
+        <div class="flex-1 h-1.5 sm:h-2 bg-neutral-800 rounded-full overflow-hidden min-w-[50px] sm:min-w-20">
           <div
             class="h-full rounded-full transition-all duration-700 bg-linear-to-r from-amber-600 to-amber-400"
             [style.width.%]="progressService.overallStats().corePercentage">
           </div>
         </div>
-        <span class="text-xs font-bold text-amber-400 shrink-0 font-mono tabular-nums w-9 text-right">
+        <span class="text-[10px] sm:text-xs font-bold text-amber-400 shrink-0 font-mono tabular-nums w-8 sm:w-9 text-right">
           {{ progressService.overallStats().corePercentage }}%
         </span>
         <span class="text-[11px] text-neutral-500 shrink-0 font-mono hidden md:block">
@@ -39,10 +39,10 @@ import { I18nService } from '../../core/services/i18n.service';
       </div>
 
       <!-- Separator -->
-      <div class="w-px h-5 bg-neutral-700 shrink-0"></div>
+      <div class="hidden sm:block w-px h-5 bg-neutral-700 shrink-0"></div>
 
       <!-- Active Layers Pills -->
-      <div class="flex items-center gap-1.5 shrink-0">
+      <div class="hidden sm:flex items-center gap-1.5 shrink-0">
         @for (meta of visibleLayers(); track meta.id) {
           <div
             [style.backgroundColor]="meta.color + '20'"
