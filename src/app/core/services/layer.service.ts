@@ -407,23 +407,50 @@ export class LayerService {
 
   private createPopupMedia(layerId: string, feature: CollectibleFeature): HTMLElement | null {
     if (feature.properties.image_id) {
-      let prefix = 'https://static.wikia.nocookie.net/gtawiki/images/';
-      let suffix = '.jpg';
-      if (layerId === 'horseshoes' || layerId === 'oysters') {
-        prefix = 'https://static.wikigta.org/en/images/';
-        suffix = '.JPG';
-      }
+      // Changed to use local images format: /images/<layerId>/<id>.webp
+      const imageSrc = `/images/${layerId}/${feature.properties.id}.webp`;
 
       const mediaWrap = document.createElement('div');
       mediaWrap.className = 'gta-popup-media-wrap';
 
       const img = document.createElement('img');
-      img.src = `${prefix}${feature.properties.image_id}${suffix}`;
+      img.src = imageSrc;
       img.className = 'gta-popup-img';
       img.alt = feature.properties.name || feature.properties.id;
       img.loading = 'lazy';
+      img.style.cursor = 'zoom-in'; // Indicate it's clickable
+      
+      // Lightbox functionality
+      img.onclick = () => {
+        const lightbox = document.createElement('div');
+        lightbox.style.position = 'fixed';
+        lightbox.style.top = '0';
+        lightbox.style.left = '0';
+        lightbox.style.width = '100vw';
+        lightbox.style.height = '100vh';
+        lightbox.style.backgroundColor = 'rgba(0,0,0,0.85)';
+        lightbox.style.zIndex = '9999';
+        lightbox.style.display = 'flex';
+        lightbox.style.justifyContent = 'center';
+        lightbox.style.alignItems = 'center';
+        lightbox.style.cursor = 'zoom-out';
+        
+        const largeImg = document.createElement('img');
+        largeImg.src = img.src; // Uses the same source (including placeholder if fallback triggered)
+        largeImg.style.maxWidth = '90%';
+        largeImg.style.maxHeight = '90%';
+        largeImg.style.boxShadow = '0 10px 25px rgba(0,0,0,0.5)';
+        largeImg.style.borderRadius = '8px';
+        largeImg.style.objectFit = 'contain';
+
+        lightbox.appendChild(largeImg);
+        lightbox.onclick = () => document.body.removeChild(lightbox);
+        document.body.appendChild(lightbox);
+      };
+
       img.onerror = () => {
-        mediaWrap.style.display = 'none';
+        img.onerror = null; // Prevent infinite loop if placeholder is also missing
+        img.src = '/images/placeholder.webp';
       };
 
       mediaWrap.appendChild(img);
