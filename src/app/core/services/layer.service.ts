@@ -377,6 +377,21 @@ export class LayerService {
           iconSpan.innerHTML = '<i class="far fa-circle text-neutral-400"></i>';
           labelText.textContent = this.i18n.t('popup.markAsCollected');
         }
+
+        // Update marker icon to toggle ghost mode
+        if (layer instanceof L.Marker && layer.options.icon) {
+          const iconOpts = (layer.options.icon as L.DivIcon).options;
+          if (typeof iconOpts.html === 'string') {
+            let html = iconOpts.html;
+            if (next && !html.includes('marker-ghost')) {
+              html = html.replace('class="marker-root ', 'class="marker-root marker-ghost ');
+              html = html.replace('class="marker-root"', 'class="marker-root marker-ghost"'); // Fallback
+            } else if (!next && html.includes('marker-ghost')) {
+              html = html.replace('marker-ghost ', '').replace('marker-ghost', '').replace('  ', ' ');
+            }
+            layer.setIcon(L.divIcon({ ...iconOpts, html }));
+          }
+        }
       });
 
       checkboxContainer.appendChild(checkbox);
@@ -489,8 +504,9 @@ export class LayerService {
 
     const geojsonLayer = L.geoJSON(geojsonData, {
       pointToLayer: (feature: any, latlng: L.LatLng) => {
+        const isCompleted = this.progressService.isChecked(layerId, String(feature.properties.id));
         const marker = L.marker(latlng, {
-          icon: getCustomIcon(iconId, undefined, iconColor),
+          icon: getCustomIcon(iconId, undefined, iconColor, isCompleted),
           riseOnHover: true
         });
 
@@ -574,8 +590,9 @@ export class LayerService {
         fillOpacity: 0.2
       }),
       pointToLayer: (feature: any, latlng: L.LatLng) => {
+        const isCompleted = this.progressService.isChecked('stunt_jumps', String(feature.properties.id));
         const marker = L.marker(latlng, {
-          icon: getCustomIcon('fa-car-burst', undefined, '#ec4899'),
+          icon: getCustomIcon('fa-car-burst', undefined, '#ec4899', isCompleted),
           riseOnHover: true
         });
 
@@ -656,8 +673,9 @@ export class LayerService {
         }),
         pointToLayer: (feature: any, latlng: L.LatLng) => {
           bounds.extend(latlng);
+          const isCompleted = this.progressService.isChecked('race_tournaments', String(feature.properties.id));
           const marker = L.marker(latlng, {
-            icon: getCustomIcon('fa-flag-checkered', undefined, rc.color),
+            icon: getCustomIcon('fa-flag-checkered', undefined, rc.color, isCompleted),
             riseOnHover: true
           });
 

@@ -16,7 +16,8 @@ import * as L from 'leaflet';
 export function getCustomIcon(
   iconId: string | undefined = undefined,
   _iconMode: string | undefined = undefined,
-  colorScheme: string = '#f59e0b'
+  colorScheme: string = '#f59e0b',
+  isCompleted: boolean = false
 ): L.DivIcon {
 
   // --- Icon HTML (rendered inside <foreignObject>) ---
@@ -48,7 +49,7 @@ export function getCustomIcon(
   const shadowStyle = `filter: drop-shadow(0 4px 10px ${colorScheme}99)`;
 
   const html = `
-    <div class="marker-root" style="--mc: ${colorScheme}">
+    <div class="marker-root ${isCompleted ? 'marker-ghost' : ''}" style="--mc: ${colorScheme}">
       <svg class="marker-pin-svg" viewBox="0 0 32 50"
            xmlns="http://www.w3.org/2000/svg"
            aria-hidden="true"

@@ -180,6 +180,13 @@ html, body {
   100% { transform: translateX(-50%) scale(3.5); opacity: 0; }
 }
 
+/* Ghost mode for completed markers */
+.marker-ghost {
+  opacity: 0.85;
+  filter: grayscale(0.65) brightness(0.9);
+}
+
+
 
 /* Cluster Marker Styling */
 .custom-cluster-icon {
