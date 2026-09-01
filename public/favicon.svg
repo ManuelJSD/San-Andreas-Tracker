@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#181e29"/>
+      <stop offset="50%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#080b10"/>
+    </linearGradient>
+
+    <!-- Golden Pin Gradient -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde68a"/>
+      <stop offset="40%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+
+    <!-- Grove Street Green Glow -->
+    <linearGradient id="groveGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4ade80"/>
+      <stop offset="100%" stop-color="#15803d"/>
+    </linearGradient>
+
+    <!-- Inner Shadow & Glow Filters -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <filter id="subtleGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Base Rounded Container with Gold/Grove Border -->
+  <rect x="16" y="16" width="480" height="480" rx="100" fill="url(#bgGrad)"/>
+  <rect x="16" y="16" width="480" height="480" rx="100" fill="none" stroke="url(#goldGrad)" stroke-width="12" stroke-opacity="0.8"/>
+  
+  <!-- Subtle Grove Street Accent Ring -->
+  <circle cx="256" cy="256" r="215" fill="none" stroke="url(#groveGrad)" stroke-width="4" stroke-opacity="0.4" stroke-dasharray="16 12"/>
+
+  <!-- Radar / Map Target Rings -->
+  <circle cx="256" cy="230" r="140" fill="none" stroke="#fbbf24" stroke-width="2" stroke-opacity="0.15"/>
+  <circle cx="256" cy="230" r="90" fill="none" stroke="#22c55e" stroke-width="2" stroke-opacity="0.15"/>
+
+  <!-- Map Pin Body (Glowing Shadow) -->
+  <path d="M256 70 C165 70, 92 143, 92 234 C92 342, 235 435, 246 442 C252 446, 260 446, 266 442 C277 435, 420 342, 420 234 C420 143, 347 70, 256 70 Z" 
+        fill="#f59e0b" opacity="0.3" filter="url(#glow)"/>
+
+  <!-- Map Pin Body (Main Solid) -->
+  <path d="M256 80 C172 80, 104 148, 104 232 C104 333, 238 421, 248 427 C253 430, 259 430, 264 427 C274 421, 408 333, 408 232 C408 148, 340 80, 256 80 Z" 
+        fill="url(#goldGrad)" stroke="#78350f" stroke-width="6"/>
+
+  <!-- Inner Dark Circle on Pin -->
+  <circle cx="256" cy="226" r="82" fill="#0f172a" stroke="#d97706" stroke-width="6"/>
+
+  <!-- 5-Point GTA Star in the Center -->
+  <path d="M256 160 L273 210 L326 210 L283 242 L300 292 L256 261 L212 292 L229 242 L186 210 L239 210 Z" 
+        fill="url(#goldGrad)" stroke="#fbbf24" stroke-width="2" filter="url(#subtleGlow)"/>
+
+  <!-- Highlight Reflection on Pin Top-Left -->
+  <path d="M136 180 C155 125, 205 98, 256 96" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round" stroke-opacity="0.6"/>
+</svg>
