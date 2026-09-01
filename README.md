@@ -1,59 +1,71 @@
-# SanAndreasTracker
+# 🗺️ GTA San Andreas — Interactive Map & 100% Checklist Tracker
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.3.
+Mapa interactivo moderno y completo de **Grand Theft Auto: San Andreas** desarrollado en **Angular 22** con **Leaflet.js**, **TailwindCSS** y **Angular Signals**.
 
-## Development server
+---
 
-To start a local development server, run:
+## ✨ Características Principales
 
+- **🗺️ Doble Capa de Mapa en Alta Resolución**:
+  - Mapa Ingame clásico.
+  - Mapa Satelital de alta resolución (por Ian Albert).
+- **⭐ Rastreador 100% Core en Tiempo Real**:
+  - 100 Graffitis / Spray Tags de Grove Street (Los Santos).
+  - 50 Fotos / Snapshots (San Fierro).
+  - 50 Herraduras / Horseshoes (Las Venturas).
+  - 50 Ostras submarinas / Oysters (Todo el estado).
+  - 70 Saltos Únicos / Stunt Jumps (con zonas y videos).
+- **🏁 Actividades y Utilidades**:
+  - 25 Circuitos de Carreras (Los Santos, San Fierro, Las Venturas, Carreras Aéreas).
+  - 65 Sobornos Policiales (bajan 1 estrella de nivel de búsqueda).
+  - 16 Zonas de Reaparición de Policía (Busted).
+  - 17 Hospitales y Zonas de Reaparición (Wasted).
+- **📋 Checklist y Buscador**:
+  - Buscador instantáneo por ID, nombre o zona.
+  - Filtros por categoría y estado (Pendiente / Completado).
+  - Botón de enfoque rápido en el mapa con animación de mira telescópica.
+- **📍 Popups Enriquecidos**:
+  - Miniaturas directas de Wiki/WikiGTA y reproductores de YouTube.
+  - Checkbox para marcar coleccionables directamente desde el mapa.
+  - Generador de enlaces compartibles.
+- **📌 Modo Compartir Ubicación**:
+  - Coloca un pin en cualquier punto del mapa y obtén coordenadas in-game exactas `[X, Y]`.
+- **💾 Respaldo & Exportación**:
+  - Guardado automático en `localStorage`.
+  - Exportar/Importar partida en formato JSON.
+  - Creación y exportación de capas personalizadas en GeoJSON.
+
+---
+
+## 🚀 Inicio Rápido
+
+### Requisitos
+- Node.js (v20 o superior)
+- npm
+
+### Instalación
 ```bash
-ng serve
+npm install
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+### Ejecutar Servidor Local
 ```bash
-ng generate component component-name
+npm start -- --port 4250
+```
+Abre tu navegador en [http://localhost:4250](http://localhost:4250).
+
+### Compilar para Producción
+```bash
+npm run build
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## 🛠️ Stack Tecnológico
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **Framework**: Angular 22 (Signals, Standalone Components)
+- **Mapas**: Leaflet.js con `CRS.Simple` y coordenadas personalizadas GTA
+- **Clustering**: `leaflet.markercluster` + `leaflet.featuregroup.subgroup`
+- **Editor de capas**: `@geoman-io/leaflet-geoman-free`
+- **Estilos**: TailwindCSS v4 + CSS custom GTA Dark theme
+- **Iconografía**: FontAwesome 6 + Radar Icons remasterizados
