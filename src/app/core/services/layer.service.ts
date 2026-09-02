@@ -20,9 +20,10 @@ import copBribesData from '../../data/cop_bribes.json';
 import raceTournamentsData from '../../data/race_tournaments.json';
 import bustedWarpsData from '../../data/busted_warps.json';
 import deathWarpsData from '../../data/death_warps.json';
+import airportsData from '../../data/airports.json';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LayerService {
   private mapService = inject(MapService);
@@ -39,13 +40,14 @@ export class LayerService {
       iconType: 'fa',
       color: '#22c55e',
       tagColor: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
-      description: '100 Grove Street spray tags located across Los Santos. Complete for weapons at CJ\'s Johnson House.',
+      description:
+        "100 Grove Street spray tags located across Los Santos. Complete for weapons at CJ's Johnson House.",
       isDefault: true,
       createCheckbox: true,
       createPopup: true,
       totalCount: 100,
       category: 'collectibles',
-      rewardText: 'Molotov, Sawn-off, Tec-9, AK-47 at Johnson House'
+      rewardText: 'Molotov, Sawn-off, Tec-9, AK-47 at Johnson House',
     },
     {
       id: 'snapshots',
@@ -54,13 +56,14 @@ export class LayerService {
       iconType: 'fa',
       color: '#3b82f6',
       tagColor: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-      description: '50 photo opportunities in San Fierro. Take photos with your camera to complete.',
+      description:
+        '50 photo opportunities in San Fierro. Take photos with your camera to complete.',
       isDefault: true,
       createCheckbox: true,
       createPopup: true,
       totalCount: 50,
       category: 'collectibles',
-      rewardText: 'Micro-SMG, Grenades, Sniper, Shotgun at Doherty Garage'
+      rewardText: 'Micro-SMG, Grenades, Sniper, Shotgun at Doherty Garage',
     },
     {
       id: 'horseshoes',
@@ -69,13 +72,14 @@ export class LayerService {
       iconType: 'fa',
       color: '#f59e0b',
       tagColor: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
-      description: '50 lucky horseshoes scattered around Las Venturas. Increases Luck stat to 1,000.',
+      description:
+        '50 lucky horseshoes scattered around Las Venturas. Increases Luck stat to 1,000.',
       isDefault: true,
       createCheckbox: true,
       createPopup: true,
       totalCount: 50,
       category: 'collectibles',
-      rewardText: 'SMG, Satchel Charges, Combat Shotgun, M4 at Four Dragons'
+      rewardText: 'SMG, Satchel Charges, Combat Shotgun, M4 at Four Dragons',
     },
     {
       id: 'oysters',
@@ -84,13 +88,14 @@ export class LayerService {
       iconType: 'emoji',
       color: '#06b6d4',
       tagColor: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30',
-      description: '50 oysters submerged in oceans, rivers and swimming pools throughout San Andreas.',
+      description:
+        '50 oysters submerged in oceans, rivers and swimming pools throughout San Andreas.',
       isDefault: true,
       createCheckbox: true,
       createPopup: true,
       totalCount: 50,
       category: 'collectibles',
-      rewardText: 'Max Lung Capacity & 100% Sex Appeal with girlfriends'
+      rewardText: 'Max Lung Capacity & 100% Sex Appeal with girlfriends',
     },
     {
       id: 'stunt_jumps',
@@ -105,7 +110,7 @@ export class LayerService {
       createPopup: true,
       totalCount: 70,
       category: 'collectibles',
-      rewardText: '$500 cash per jump + 100% completion progress'
+      rewardText: '$500 cash per jump + 100% completion progress',
     },
     {
       id: 'cop_bribes',
@@ -120,7 +125,7 @@ export class LayerService {
       createPopup: true,
       totalCount: 65,
       category: 'utilities',
-      rewardText: 'Reduces Wanted Level by 1 Star'
+      rewardText: 'Reduces Wanted Level by 1 Star',
     },
     {
       id: 'race_tournaments',
@@ -135,7 +140,7 @@ export class LayerService {
       createPopup: true,
       totalCount: 25,
       category: 'activities',
-      rewardText: '$10,000 first prize per race + completion status'
+      rewardText: '$10,000 first prize per race + completion status',
     },
     {
       id: 'busted_warps',
@@ -150,7 +155,7 @@ export class LayerService {
       createPopup: true,
       totalCount: 16,
       category: 'utilities',
-      rewardText: 'Respawn zones when arrested'
+      rewardText: 'Respawn zones when arrested',
     },
     {
       id: 'death_warps',
@@ -159,14 +164,30 @@ export class LayerService {
       iconType: 'fa',
       color: '#ef4444',
       tagColor: 'bg-red-500/20 text-red-400 border-red-500/30',
-      description: 'Hospital locations and respawn zones when wasted. Katie Zhan girlfriend retains weapons!',
+      description:
+        'Hospital locations and respawn zones when wasted. Katie Zhan girlfriend retains weapons!',
       isDefault: false,
       createCheckbox: false,
       createPopup: true,
       totalCount: 17,
       category: 'utilities',
-      rewardText: 'Respawn hospital zones when wasted'
-    }
+      rewardText: 'Respawn hospital zones when wasted',
+    },
+    {
+      id: 'airports',
+      name: 'Airports',
+      icon: 'fa-plane',
+      iconType: 'fa',
+      color: '#ef4444',
+      tagColor: 'bg-red-500/20 text-red-400 border-red-500/30',
+      description: 'Airport locations',
+      isDefault: false,
+      createCheckbox: false,
+      createPopup: true,
+      totalCount: 4,
+      category: 'utilities',
+      rewardText: '',
+    },
   ];
 
   // Active layers set
@@ -175,11 +196,11 @@ export class LayerService {
   // Localized Layer Metadata (reactive to current language)
   public readonly localizedLayerMetadata = computed(() => {
     this.i18n.currentLang();
-    return this.layerMetadata.map(meta => ({
+    return this.layerMetadata.map((meta) => ({
       ...meta,
       name: this.i18n.t(`layer.${meta.id}.name`),
       description: this.i18n.t(`layer.${meta.id}.desc`),
-      rewardText: meta.rewardText ? this.i18n.t(`layer.${meta.id}.reward`) : undefined
+      rewardText: meta.rewardText ? this.i18n.t(`layer.${meta.id}.reward`) : undefined,
     }));
   });
 
@@ -187,11 +208,14 @@ export class LayerService {
   public customLayers = signal<CustomLayerData[]>([]);
 
   // Internal layer storage: layerId -> { subgroup: L.FeatureGroup, featureLayers: Map<featureId, L.Layer[]> }
-  private layerInstances = new Map<string, {
-    group: L.LayerGroup;
-    featureLayers: Map<string, L.Layer[]>;
-    bounds: L.LatLngBounds;
-  }>();
+  private layerInstances = new Map<
+    string,
+    {
+      group: L.LayerGroup;
+      featureLayers: Map<string, L.Layer[]>;
+      bounds: L.LatLngBounds;
+    }
+  >();
 
   constructor() {
     this.loadCustomLayersFromStorage();
@@ -202,9 +226,9 @@ export class LayerService {
     const initialActive = new Set<string>();
 
     if (savedActive.length > 0) {
-      savedActive.forEach(id => initialActive.add(id));
+      savedActive.forEach((id) => initialActive.add(id));
     } else {
-      this.layerMetadata.filter(l => l.isDefault).forEach(l => initialActive.add(l.id));
+      this.layerMetadata.filter((l) => l.isDefault).forEach((l) => initialActive.add(l.id));
     }
 
     this.activeLayerIds.set(initialActive);
@@ -219,12 +243,13 @@ export class LayerService {
     this.buildRaceTournamentsLayer();
     this.buildBustedWarpsLayer();
     this.buildDeathWarpsLayer();
+    this.buildAirportsLayer();
 
     // Custom layers
-    this.customLayers().forEach(cl => this.buildCustomLayer(cl));
+    this.customLayers().forEach((cl) => this.buildCustomLayer(cl));
 
     // Show initial active layers on map
-    initialActive.forEach(id => this.showLayer(id));
+    initialActive.forEach((id) => this.showLayer(id));
 
     // Check URL parameters for direct feature navigation
     this.checkDirectNavigation();
@@ -287,14 +312,17 @@ export class LayerService {
     this.mapService.removeAllHighlights();
 
     const bounds = L.latLngBounds([]);
-    layers.forEach(l => {
+    layers.forEach((l) => {
       this.mapService.highlightLayer(l);
       if (l instanceof L.Polyline) {
         bounds.extend(l.getBounds());
       } else if (l instanceof L.Circle) {
         const c = l.getLatLng();
         const r = (l as any).getRadius ? (l as any).getRadius() : 2;
-        bounds.extend([[c.lat - r, c.lng - r], [c.lat + r, c.lng + r]]);
+        bounds.extend([
+          [c.lat - r, c.lng - r],
+          [c.lat + r, c.lng + r],
+        ]);
       } else if (l instanceof L.Marker) {
         bounds.extend(l.getLatLng());
       }
@@ -318,7 +346,11 @@ export class LayerService {
 
   // --- POPUP GENERATOR ---
 
-  private createPopupContent(layerId: string, feature: CollectibleFeature, layer: L.Layer): HTMLElement {
+  private createPopupContent(
+    layerId: string,
+    feature: CollectibleFeature,
+    layer: L.Layer,
+  ): HTMLElement {
     const container = document.createElement('div');
     container.className = 'gta-popup-content';
 
@@ -327,7 +359,8 @@ export class LayerService {
 
     const title = document.createElement('h3');
     title.className = 'gta-popup-title';
-    title.textContent = feature.properties.name || `${this.getLayerName(layerId)} #${feature.properties.id}`;
+    title.textContent =
+      feature.properties.name || `${this.getLayerName(layerId)} #${feature.properties.id}`;
     header.appendChild(title);
 
     container.appendChild(header);
@@ -347,7 +380,7 @@ export class LayerService {
     }
 
     // Collectible Checkbox (Toggle completed status)
-    const meta = this.layerMetadata.find(l => l.id === layerId);
+    const meta = this.layerMetadata.find((l) => l.id === layerId);
     if (meta?.createCheckbox) {
       const isChecked = this.progressService.isChecked(layerId, feature.properties.id);
 
@@ -359,14 +392,22 @@ export class LayerService {
       checkbox.checked = isChecked;
 
       const iconSpan = document.createElement('span');
-      iconSpan.innerHTML = isChecked ? '<i class="fas fa-check-circle text-emerald-400"></i>' : '<i class="far fa-circle text-neutral-400"></i>';
+      iconSpan.innerHTML = isChecked
+        ? '<i class="fas fa-check-circle text-emerald-400"></i>'
+        : '<i class="far fa-circle text-neutral-400"></i>';
 
       const labelText = document.createElement('span');
       labelText.className = 'btn-label-text';
-      labelText.textContent = isChecked ? this.i18n.t('popup.completed') : this.i18n.t('popup.markAsCollected');
+      labelText.textContent = isChecked
+        ? this.i18n.t('popup.completed')
+        : this.i18n.t('popup.markAsCollected');
 
       checkbox.addEventListener('change', () => {
-        const next = this.progressService.toggleChecked(layerId, feature.properties.id, checkbox.checked);
+        const next = this.progressService.toggleChecked(
+          layerId,
+          feature.properties.id,
+          checkbox.checked,
+        );
         checkbox.checked = next;
         if (next) {
           checkboxContainer.classList.add('completed');
@@ -387,7 +428,10 @@ export class LayerService {
               html = html.replace('class="marker-root ', 'class="marker-root marker-ghost ');
               html = html.replace('class="marker-root"', 'class="marker-root marker-ghost"'); // Fallback
             } else if (!next && html.includes('marker-ghost')) {
-              html = html.replace('marker-ghost ', '').replace('marker-ghost', '').replace('  ', ' ');
+              html = html
+                .replace('marker-ghost ', '')
+                .replace('marker-ghost', '')
+                .replace('  ', ' ');
             }
             layer.setIcon(L.divIcon({ ...iconOpts, html }));
           }
@@ -434,7 +478,7 @@ export class LayerService {
       img.alt = feature.properties.name || feature.properties.id;
       img.loading = 'lazy';
       img.style.cursor = 'zoom-in'; // Indicate it's clickable
-      
+
       // Lightbox functionality
       img.onclick = () => {
         const lightbox = document.createElement('div');
@@ -449,7 +493,7 @@ export class LayerService {
         lightbox.style.justifyContent = 'center';
         lightbox.style.alignItems = 'center';
         lightbox.style.cursor = 'zoom-out';
-        
+
         const largeImg = document.createElement('img');
         largeImg.src = img.src; // Uses the same source (including placeholder if fallback triggered)
         largeImg.style.maxWidth = '90%';
@@ -479,7 +523,8 @@ export class LayerService {
       iframe.src = `https://www.youtube-nocookie.com/embed/${feature.properties.video_id}`;
       iframe.title = 'YouTube video';
       iframe.frameBorder = '0';
-      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allow =
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
       iframe.allowFullscreen = true;
 
       videoWrap.appendChild(iframe);
@@ -494,7 +539,7 @@ export class LayerService {
     layerId: LayerId,
     geojsonData: any,
     iconId: string,
-    iconColor: string
+    iconColor: string,
   ): void {
     const parentCluster = this.mapService.getParentClusterGroup();
     const L_ext = (window as any).L || L;
@@ -508,12 +553,12 @@ export class LayerService {
         const isCompleted = this.progressService.isChecked(layerId, String(feature.properties.id));
         const marker = L.marker(latlng, {
           icon: getCustomIcon(iconId, undefined, iconColor, isCompleted),
-          riseOnHover: true
+          riseOnHover: true,
         });
 
         marker.bindPopup(() => this.createPopupContent(layerId, feature, marker), {
           maxWidth: 320,
-          className: 'gta-leaflet-popup'
+          className: 'gta-leaflet-popup',
         });
 
         marker.on('click', () => {
@@ -545,9 +590,9 @@ export class LayerService {
           imageLink: feature.properties.image_link,
           videoId: feature.properties.video_id,
           completed: this.progressService.isChecked(layerId, fid),
-          coordinates: [latlng.lat, latlng.lng]
+          coordinates: [latlng.lat, latlng.lng],
         });
-      }
+      },
     });
 
     subgroup.addLayer(geojsonLayer);
@@ -575,6 +620,10 @@ export class LayerService {
     this.buildStandardPointLayer('cop_bribes', copBribesData, 'fa-star', '#eab308');
   }
 
+  private buildAirportsLayer(): void {
+    this.buildStandardPointLayer('airports', airportsData, 'fa-plane', '#06b6d4');
+  }
+
   private buildStuntJumpsLayer(): void {
     const parentCluster = this.mapService.getParentClusterGroup();
     const L_ext = (window as any).L || L;
@@ -589,18 +638,21 @@ export class LayerService {
         weight: 4,
         opacity: 0.8,
         fillColor: '#ec4899',
-        fillOpacity: 0.2
+        fillOpacity: 0.2,
       }),
       pointToLayer: (feature: any, latlng: L.LatLng) => {
-        const isCompleted = this.progressService.isChecked('stunt_jumps', String(feature.properties.id));
+        const isCompleted = this.progressService.isChecked(
+          'stunt_jumps',
+          String(feature.properties.id),
+        );
         const marker = L.marker(latlng, {
           icon: getCustomIcon('fa-car-burst', undefined, '#ec4899', isCompleted),
-          riseOnHover: true
+          riseOnHover: true,
         });
 
         marker.bindPopup(() => this.createPopupContent('stunt_jumps', feature, marker), {
           maxWidth: 320,
-          className: 'gta-leaflet-popup'
+          className: 'gta-leaflet-popup',
         });
 
         return marker;
@@ -627,23 +679,23 @@ export class LayerService {
             imageId: feature.properties.image_id,
             videoId: feature.properties.video_id,
             completed: this.progressService.isChecked('stunt_jumps', fid),
-            coordinates: [latlng.lat, latlng.lng]
+            coordinates: [latlng.lat, latlng.lng],
           });
         }
 
         layer.on({
           mouseover: () => {
             const list = featureMap.get(fid) || [];
-            list.forEach(l => this.mapService.highlightLayer(l));
+            list.forEach((l) => this.mapService.highlightLayer(l));
           },
           mouseout: () => {
             this.mapService.removeAllHighlights();
           },
           click: () => {
             this.mapService.setFeatureHistory('stunt_jumps', fid);
-          }
+          },
         });
-      }
+      },
     });
 
     subgroup.addLayer(geojsonLayer);
@@ -660,35 +712,42 @@ export class LayerService {
     const raceConfigs = [
       { data: (raceTournamentsData as any).los_santos_races, color: '#3b82f6', name: 'Los Santos' },
       { data: (raceTournamentsData as any).san_fierro_races, color: '#06b6d4', name: 'San Fierro' },
-      { data: (raceTournamentsData as any).las_venturas_races, color: '#f59e0b', name: 'Las Venturas' },
-      { data: (raceTournamentsData as any).air_races, color: '#eab308', name: 'Air Races' }
+      {
+        data: (raceTournamentsData as any).las_venturas_races,
+        color: '#f59e0b',
+        name: 'Las Venturas',
+      },
+      { data: (raceTournamentsData as any).air_races, color: '#eab308', name: 'Air Races' },
     ];
 
-    raceConfigs.forEach(rc => {
+    raceConfigs.forEach((rc) => {
       if (!rc.data) return;
 
       const layer = L.geoJSON(rc.data, {
         style: () => ({
           color: rc.color,
           weight: 5,
-          opacity: 0.85
+          opacity: 0.85,
         }),
         pointToLayer: (feature: any, latlng: L.LatLng) => {
           bounds.extend(latlng);
-          const isCompleted = this.progressService.isChecked('race_tournaments', String(feature.properties.id));
+          const isCompleted = this.progressService.isChecked(
+            'race_tournaments',
+            String(feature.properties.id),
+          );
           const marker = L.marker(latlng, {
             icon: getCustomIcon('fa-flag-checkered', undefined, rc.color, isCompleted),
-            riseOnHover: true
+            riseOnHover: true,
           });
 
           marker.bindTooltip(`${rc.name}: ${feature.properties.id}`, {
             direction: 'bottom',
-            className: 'gta-map-tooltip'
+            className: 'gta-map-tooltip',
           });
 
           marker.bindPopup(() => this.createPopupContent('race_tournaments', feature, marker), {
             maxWidth: 320,
-            className: 'gta-leaflet-popup'
+            className: 'gta-leaflet-popup',
           });
 
           return marker;
@@ -708,23 +767,23 @@ export class LayerService {
               description: feature.properties.description,
               videoId: feature.properties.video_id,
               completed: this.progressService.isChecked('race_tournaments', fid),
-              coordinates: [feature.geometry.coordinates[1], feature.geometry.coordinates[0]]
+              coordinates: [feature.geometry.coordinates[1], feature.geometry.coordinates[0]],
             });
           }
 
           l.on({
             mouseover: () => {
               const list = featureMap.get(fid) || [];
-              list.forEach(item => this.mapService.highlightLayer(item));
+              list.forEach((item) => this.mapService.highlightLayer(item));
             },
             mouseout: () => {
               this.mapService.removeAllHighlights();
             },
             click: () => {
               this.mapService.setFeatureHistory('race_tournaments', fid);
-            }
+            },
           });
-        }
+        },
       });
 
       group.addLayer(layer);
@@ -745,18 +804,18 @@ export class LayerService {
         fillColor: '#38bdf8',
         opacity: 0.8,
         fillOpacity: 0.25,
-        weight: 3
+        weight: 3,
       }),
       pointToLayer: (feature: any, latlng: L.LatLng) => {
         bounds.extend(latlng);
         const marker = L.marker(latlng, {
           icon: getCustomIcon('emoji:👮', undefined, '#0284c7'),
-          riseOnHover: true
+          riseOnHover: true,
         });
 
         marker.bindPopup(() => this.createPopupContent('busted_warps', feature, marker), {
           maxWidth: 320,
-          className: 'gta-leaflet-popup'
+          className: 'gta-leaflet-popup',
         });
 
         return marker;
@@ -771,16 +830,16 @@ export class LayerService {
         l.on({
           mouseover: () => {
             const list = featureMap.get(fid) || [];
-            list.forEach(item => this.mapService.highlightLayer(item));
+            list.forEach((item) => this.mapService.highlightLayer(item));
           },
           mouseout: () => {
             this.mapService.removeAllHighlights();
           },
           click: () => {
             this.mapService.setFeatureHistory('busted_warps', fid);
-          }
+          },
         });
-      }
+      },
     });
 
     group.addLayer(layer);
@@ -798,7 +857,7 @@ export class LayerService {
         fillColor: feature?.properties?.id === 'Katie' ? '#10b981' : '#ef4444',
         opacity: 0.85,
         fillOpacity: 0.2,
-        weight: 3
+        weight: 3,
       }),
       pointToLayer: (feature: any, latlng: L.LatLng) => {
         bounds.extend(latlng);
@@ -807,17 +866,17 @@ export class LayerService {
             radius: feature.properties.radius,
             color: '#10b981',
             fillColor: '#10b981',
-            fillOpacity: 0.25
+            fillOpacity: 0.25,
           });
         }
         const marker = L.marker(latlng, {
           icon: getCustomIcon('fa-hospital', undefined, '#ef4444'),
-          riseOnHover: true
+          riseOnHover: true,
         });
 
         marker.bindPopup(() => this.createPopupContent('death_warps', feature, marker), {
           maxWidth: 320,
-          className: 'gta-leaflet-popup'
+          className: 'gta-leaflet-popup',
         });
 
         return marker;
@@ -832,16 +891,16 @@ export class LayerService {
         l.on({
           mouseover: () => {
             const list = featureMap.get(fid) || [];
-            list.forEach(item => this.mapService.highlightLayer(item));
+            list.forEach((item) => this.mapService.highlightLayer(item));
           },
           mouseout: () => {
             this.mapService.removeAllHighlights();
           },
           click: () => {
             this.mapService.setFeatureHistory('death_warps', fid);
-          }
+          },
         });
-      }
+      },
     });
 
     group.addLayer(layer);
@@ -857,9 +916,9 @@ export class LayerService {
       name,
       geojson: {
         type: 'FeatureCollection',
-        features: []
+        features: [],
       },
-      createdAt: Date.now()
+      createdAt: Date.now(),
     };
 
     const current = this.customLayers();
@@ -877,7 +936,7 @@ export class LayerService {
     this.hideLayer(id);
     this.layerInstances.delete(id);
 
-    const updated = this.customLayers().filter(l => l.id !== id);
+    const updated = this.customLayers().filter((l) => l.id !== id);
     this.customLayers.set(updated);
     this.saveCustomLayersToStorage(updated);
 
@@ -887,7 +946,7 @@ export class LayerService {
   }
 
   public exportCustomLayer(id: string): void {
-    const layer = this.customLayers().find(l => l.id === id);
+    const layer = this.customLayers().find((l) => l.id === id);
     if (!layer) return;
 
     const blob = new Blob([JSON.stringify(layer.geojson, null, 2)], { type: 'application/json' });
@@ -909,9 +968,9 @@ export class LayerService {
         bounds.extend(latlng);
         return L.marker(latlng, {
           icon: getCustomIcon(customLayer.name.substring(0, 2), undefined, '#a855f7'),
-          riseOnHover: true
+          riseOnHover: true,
         });
-      }
+      },
     });
 
     group.addLayer(geojsonLayer);
@@ -931,7 +990,7 @@ export class LayerService {
     const key = `layer.${layerId}.name`;
     const val = this.i18n.t(key);
     if (val && val !== key) return val;
-    const found = this.layerMetadata.find(l => l.id === layerId);
+    const found = this.layerMetadata.find((l) => l.id === layerId);
     return found ? found.name : layerId;
   }
 

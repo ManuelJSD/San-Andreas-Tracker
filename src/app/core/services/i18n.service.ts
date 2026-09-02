@@ -62,6 +62,10 @@ const ES_TRANSLATIONS: Translations = {
   'layer.death_warps.desc': 'Ubicaciones de hospitales al morir. ¡La novia Katie Zhan conserva tus armas!',
   'layer.death_warps.reward': 'Zonas de reaparición de hospital al morir',
 
+  'layer.airports.name': 'Aeropuertos',
+  'layer.airports.desc': 'Ubicaciones de aeropuertos y pistas de aterrizaje en San Andreas.',
+  'layer.airports.reward': 'Acceso a aviones y viajes rápidos',
+
   // Tab 2: Checklist
   'checklist.searchPlaceholder': 'Buscar por ID, nombre o zona...',
   'checklist.allCategories': 'Todas las categorías',
@@ -206,6 +210,10 @@ const EN_TRANSLATIONS: Translations = {
   'layer.death_warps.name': 'Hospital Respawn Warps',
   'layer.death_warps.desc': 'Hospital locations and respawn zones when wasted. Katie Zhan girlfriend retains weapons!',
   'layer.death_warps.reward': 'Respawn hospital zones when wasted',
+
+  'layer.airports.name': 'Airports',
+  'layer.airports.desc': 'Airport locations and airfields in San Andreas.',
+  'layer.airports.reward': 'Access to airplanes and fast travel',
 
   // Tab 2: Checklist
   'checklist.searchPlaceholder': 'Search by ID, name or zone...',
