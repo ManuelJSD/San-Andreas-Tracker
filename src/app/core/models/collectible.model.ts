@@ -8,7 +8,8 @@ export type LayerId =
   | 'race_tournaments'
   | 'busted_warps'
   | 'death_warps'
-  | 'airports';
+  | 'airports'
+  | 'safe_houses';
 
 export interface CollectibleFeatureProperties {
   id: string;

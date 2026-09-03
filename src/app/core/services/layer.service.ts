@@ -21,6 +21,7 @@ import raceTournamentsData from '../../data/race_tournaments.json';
 import bustedWarpsData from '../../data/busted_warps.json';
 import deathWarpsData from '../../data/death_warps.json';
 import airportsData from '../../data/airports.json';
+import safeHousesData from '../../data/safe_houses.json';
 
 @Injectable({
   providedIn: 'root',
@@ -188,6 +189,21 @@ export class LayerService {
       category: 'utilities',
       rewardText: '',
     },
+    {
+      id: 'safe_houses',
+      name: 'Safe Houses',
+      icon: 'fa-home',
+      iconType: 'fa',
+      color: '#a78bfa',
+      tagColor: 'bg-violet-500/20 text-violet-400 border-violet-500/30',
+      description: 'Safe house locations',
+      isDefault: true,
+      createCheckbox: true,
+      createPopup: true,
+      totalCount: 37,
+      category: 'utilities',
+      rewardText: '',
+    },
   ];
 
   // Active layers set
@@ -244,6 +260,7 @@ export class LayerService {
     this.buildBustedWarpsLayer();
     this.buildDeathWarpsLayer();
     this.buildAirportsLayer();
+    this.buildSafeHousesLayer();
 
     // Custom layers
     this.customLayers().forEach((cl) => this.buildCustomLayer(cl));
@@ -622,6 +639,10 @@ export class LayerService {
 
   private buildAirportsLayer(): void {
     this.buildStandardPointLayer('airports', airportsData, 'fa-plane', '#06b6d4');
+  }
+
+  private buildSafeHousesLayer(): void {
+    this.buildStandardPointLayer('safe_houses', safeHousesData, 'fa-home', '#a78bfa');
   }
 
   private buildStuntJumpsLayer(): void {

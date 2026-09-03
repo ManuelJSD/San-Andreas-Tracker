@@ -27,15 +27,18 @@ const ES_TRANSLATIONS: Translations = {
 
   // Layer details
   'layer.tags.name': 'Grafitis',
-  'layer.tags.desc': '100 grafitis de Grove Street por todo Los Santos. Completa para obtener armas en la Casa de CJ.',
+  'layer.tags.desc':
+    '100 grafitis de Grove Street por todo Los Santos. Completa para obtener armas en la Casa de CJ.',
   'layer.tags.reward': 'Molotov, Recortada, Tec-9 y AK-47 en Casa Johnson',
 
   'layer.snapshots.name': 'Fotografías',
-  'layer.snapshots.desc': '50 oportunidades fotográficas en San Fierro. Haz fotos con tu cámara para completar.',
+  'layer.snapshots.desc':
+    '50 oportunidades fotográficas en San Fierro. Haz fotos con tu cámara para completar.',
   'layer.snapshots.reward': 'Micro-SMG, Granadas, Francotirador y Escopeta en Garaje Doherty',
 
   'layer.horseshoes.name': 'Herraduras',
-  'layer.horseshoes.desc': '50 herraduras de la suerte repartidas por Las Venturas. Aumenta la suerte a 1.000.',
+  'layer.horseshoes.desc':
+    '50 herraduras de la suerte repartidas por Las Venturas. Aumenta la suerte a 1.000.',
   'layer.horseshoes.reward': 'SMG, Cargas explosivas, Escopeta de combate y M4 en Four Dragons',
 
   'layer.oysters.name': 'Ostras',
@@ -43,15 +46,18 @@ const ES_TRANSLATIONS: Translations = {
   'layer.oysters.reward': 'Capacidad pulmonar al máximo y 100% de Sex Appeal con novias',
 
   'layer.stunt_jumps.name': 'Saltos Únicos',
-  'layer.stunt_jumps.desc': '70 saltos acrobáticos cinematográficos únicos por todo San Andreas con vehículos.',
+  'layer.stunt_jumps.desc':
+    '70 saltos acrobáticos cinematográficos únicos por todo San Andreas con vehículos.',
   'layer.stunt_jumps.reward': '500 $ por salto + progreso para el 100%',
 
   'layer.cop_bribes.name': 'Sobornos Policiales',
-  'layer.cop_bribes.desc': 'Estrellas policiales flotantes que reducen el nivel de búsqueda en 1 estrella al recogerlas.',
+  'layer.cop_bribes.desc':
+    'Estrellas policiales flotantes que reducen el nivel de búsqueda en 1 estrella al recogerlas.',
   'layer.cop_bribes.reward': 'Reduce el nivel de búsqueda en 1 estrella',
 
   'layer.race_tournaments.name': 'Torneos de Carreras',
-  'layer.race_tournaments.desc': 'Circuitos de carreras callejeras en Los Santos, San Fierro, Las Venturas y Carreras Aéreas.',
+  'layer.race_tournaments.desc':
+    'Circuitos de carreras callejeras en Los Santos, San Fierro, Las Venturas y Carreras Aéreas.',
   'layer.race_tournaments.reward': '10.000 $ de premio por carrera + estado de completado',
 
   'layer.busted_warps.name': 'Comisarías (Arrestado)',
@@ -59,12 +65,17 @@ const ES_TRANSLATIONS: Translations = {
   'layer.busted_warps.reward': 'Zonas de reaparición al ser arrestado',
 
   'layer.death_warps.name': 'Hospitales (Eliminado)',
-  'layer.death_warps.desc': 'Ubicaciones de hospitales al morir. ¡La novia Katie Zhan conserva tus armas!',
+  'layer.death_warps.desc':
+    'Ubicaciones de hospitales al morir. ¡La novia Katie Zhan conserva tus armas!',
   'layer.death_warps.reward': 'Zonas de reaparición de hospital al morir',
 
   'layer.airports.name': 'Aeropuertos',
   'layer.airports.desc': 'Ubicaciones de aeropuertos y pistas de aterrizaje en San Andreas.',
   'layer.airports.reward': 'Acceso a aviones y viajes rápidos',
+
+  'layer.safe_houses.name': 'Casas de Resguardo',
+  'layer.safe_houses.desc': 'Ubicaciones de casas de resguardo en San Andreas.',
+  'layer.safe_houses.reward': 'Acceso a casas de resguardo',
 
   // Tab 2: Checklist
   'checklist.searchPlaceholder': 'Buscar por ID, nombre o zona...',
@@ -104,7 +115,8 @@ const ES_TRANSLATIONS: Translations = {
   'settings.langEs': 'Español',
   'settings.langEn': 'English',
   'settings.backupTitle': 'Respaldo de Progreso',
-  'settings.backupDesc': 'Exporta tu partida o importa un archivo JSON para sincronizar en otro dispositivo.',
+  'settings.backupDesc':
+    'Exporta tu partida o importa un archivo JSON para sincronizar en otro dispositivo.',
   'settings.export': 'Exportar',
   'settings.import': 'Importar',
   'settings.importSuccess': '¡Progreso importado con éxito!',
@@ -115,7 +127,8 @@ const ES_TRANSLATIONS: Translations = {
 
   // Reset Modal
   'resetModal.title': '¿Reiniciar todo el progreso?',
-  'resetModal.desc': 'Se borrarán todos los coleccionables completados guardados en tu navegador. Esta acción no se puede deshacer.',
+  'resetModal.desc':
+    'Se borrarán todos los coleccionables completados guardados en tu navegador. Esta acción no se puede deshacer.',
   'resetModal.cancel': 'Cancelar',
   'resetModal.confirm': 'Sí, borrar todo',
 
@@ -145,15 +158,15 @@ const ES_TRANSLATIONS: Translations = {
   // Attributions Modal
   'attributions.title': 'GTA San Andreas Mapa Interactivo',
   'attributions.subtitle': 'Versión Angular 22 Modernizada',
-  'attributions.desc': 'Este mapa interactivo y rastreador del 100% incluye todas las ubicaciones de coleccionables, saltos y misiones secundarias de Grand Theft Auto: San Andreas.',
+  'attributions.desc':
+    'Este mapa interactivo y rastreador del 100% incluye todas las ubicaciones de coleccionables, saltos y misiones secundarias de Grand Theft Auto: San Andreas.',
   'attributions.sourcesTitle': 'Fuentes & Agradecimientos:',
   'attributions.sourceMarkers': 'Ubicaciones de marcadores de',
   'attributions.sourceWiki': 'Imágenes de Graffitis y Fotos de',
   'attributions.sourceWikiGta': 'Imágenes de Herraduras y Ostras de',
-  'attributions.sourceIcons': 'Iconos de radar remasterizados por',
   'attributions.sourceMap': 'Mapa satelital de alta resolución por',
   'attributions.sourceGithub': 'Código fuente disponible en GitHub',
-  'attributions.close': 'Entendido'
+  'attributions.close': 'Entendido',
 };
 
 const EN_TRANSLATIONS: Translations = {
@@ -176,44 +189,57 @@ const EN_TRANSLATIONS: Translations = {
 
   // Layer details
   'layer.tags.name': 'Spray Tags',
-  'layer.tags.desc': '100 Grove Street spray tags located across Los Santos. Complete for weapons at CJ\'s Johnson House.',
+  'layer.tags.desc':
+    "100 Grove Street spray tags located across Los Santos. Complete for weapons at CJ's Johnson House.",
   'layer.tags.reward': 'Molotov, Sawn-off, Tec-9, AK-47 at Johnson House',
 
   'layer.snapshots.name': 'Snapshots',
-  'layer.snapshots.desc': '50 photo opportunities in San Fierro. Take photos with your camera to complete.',
+  'layer.snapshots.desc':
+    '50 photo opportunities in San Fierro. Take photos with your camera to complete.',
   'layer.snapshots.reward': 'Micro-SMG, Grenades, Sniper, Shotgun at Doherty Garage',
 
   'layer.horseshoes.name': 'Horseshoes',
-  'layer.horseshoes.desc': '50 lucky horseshoes scattered around Las Venturas. Increases Luck stat to 1,000.',
+  'layer.horseshoes.desc':
+    '50 lucky horseshoes scattered around Las Venturas. Increases Luck stat to 1,000.',
   'layer.horseshoes.reward': 'SMG, Satchel Charges, Combat Shotgun, M4 at Four Dragons',
 
   'layer.oysters.name': 'Oysters',
-  'layer.oysters.desc': '50 oysters submerged in oceans, rivers and swimming pools throughout San Andreas.',
+  'layer.oysters.desc':
+    '50 oysters submerged in oceans, rivers and swimming pools throughout San Andreas.',
   'layer.oysters.reward': 'Max Lung Capacity & 100% Sex Appeal with girlfriends',
 
   'layer.stunt_jumps.name': 'Unique Stunt Jumps',
-  'layer.stunt_jumps.desc': '70 unique cinematic stunt jumps to conquer across San Andreas with vehicles.',
+  'layer.stunt_jumps.desc':
+    '70 unique cinematic stunt jumps to conquer across San Andreas with vehicles.',
   'layer.stunt_jumps.reward': '$500 cash per jump + 100% completion progress',
 
   'layer.cop_bribes.name': 'Police Bribes',
-  'layer.cop_bribes.desc': 'Floating police badge icons that reduce wanted level by 1 star when picked up.',
+  'layer.cop_bribes.desc':
+    'Floating police badge icons that reduce wanted level by 1 star when picked up.',
   'layer.cop_bribes.reward': 'Reduces Wanted Level by 1 Star',
 
   'layer.race_tournaments.name': 'Race Tournaments',
-  'layer.race_tournaments.desc': 'Street race circuits in Los Santos, San Fierro, Las Venturas, and Air races.',
+  'layer.race_tournaments.desc':
+    'Street race circuits in Los Santos, San Fierro, Las Venturas, and Air races.',
   'layer.race_tournaments.reward': '$10,000 first prize per race + completion status',
 
   'layer.busted_warps.name': 'Busted Police Warps',
-  'layer.busted_warps.desc': 'Police department spawn zones and boundary areas when arrested in San Andreas.',
+  'layer.busted_warps.desc':
+    'Police department spawn zones and boundary areas when arrested in San Andreas.',
   'layer.busted_warps.reward': 'Respawn zones when arrested',
 
   'layer.death_warps.name': 'Hospital Respawn Warps',
-  'layer.death_warps.desc': 'Hospital locations and respawn zones when wasted. Katie Zhan girlfriend retains weapons!',
+  'layer.death_warps.desc':
+    'Hospital locations and respawn zones when wasted. Katie Zhan girlfriend retains weapons!',
   'layer.death_warps.reward': 'Respawn hospital zones when wasted',
 
   'layer.airports.name': 'Airports',
   'layer.airports.desc': 'Airport locations and airfields in San Andreas.',
   'layer.airports.reward': 'Access to airplanes and fast travel',
+
+  'layer.safe_houses.name': 'Safe Houses',
+  'layer.safe_houses.desc': 'Safe house locations in San Andreas.',
+  'layer.safe_houses.reward': 'Access to save progress and change clothes',
 
   // Tab 2: Checklist
   'checklist.searchPlaceholder': 'Search by ID, name or zone...',
@@ -244,7 +270,7 @@ const EN_TRANSLATIONS: Translations = {
   'custom.itemsCount': '{count} items',
   'custom.exportTooltip': 'Export GeoJSON',
   'custom.deleteTooltip': 'Delete layer',
-  'custom.empty': 'You don\'t have any custom layers created yet.',
+  'custom.empty': "You don't have any custom layers created yet.",
   'custom.deleteConfirm': 'Do you want to delete this custom layer?',
 
   // Tab 5: Settings
@@ -264,7 +290,8 @@ const EN_TRANSLATIONS: Translations = {
 
   // Reset Modal
   'resetModal.title': 'Reset all progress?',
-  'resetModal.desc': 'All completed collectibles saved in your browser will be deleted. This action cannot be undone.',
+  'resetModal.desc':
+    'All completed collectibles saved in your browser will be deleted. This action cannot be undone.',
   'resetModal.cancel': 'Cancel',
   'resetModal.confirm': 'Yes, delete all',
 
@@ -294,19 +321,19 @@ const EN_TRANSLATIONS: Translations = {
   // Attributions Modal
   'attributions.title': 'GTA San Andreas Interactive Map',
   'attributions.subtitle': 'Modernized Angular 22 Version',
-  'attributions.desc': 'This interactive map and 100% tracker includes all collectible locations, stunt jumps, and side missions for Grand Theft Auto: San Andreas.',
+  'attributions.desc':
+    'This interactive map and 100% tracker includes all collectible locations, stunt jumps, and side missions for Grand Theft Auto: San Andreas.',
   'attributions.sourcesTitle': 'Sources & Acknowledgments:',
   'attributions.sourceMarkers': 'Marker locations from',
   'attributions.sourceWiki': 'Spray Tag and Snapshot photos from',
   'attributions.sourceWikiGta': 'Horseshoe and Oyster photos from',
-  'attributions.sourceIcons': 'Remastered radar icons by',
   'attributions.sourceMap': 'High-resolution satellite map by',
   'attributions.sourceGithub': 'Source code available on GitHub',
-  'attributions.close': 'Got it'
+  'attributions.close': 'Got it',
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class I18nService {
   private storage = inject(StorageService);
